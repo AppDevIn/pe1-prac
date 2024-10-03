@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
   private boolean completed;
   private String description;
 
@@ -17,7 +17,7 @@ public class Task {
     String description = args[1];
 
     if (type == Task.ANYTIME) {
-       return new Task(description);
+       return new AnyTimeTask(description);
     } else if (type == Task.DEADLINE) {
       int dueInDays = Integer.parseInt(args[2]);
       return new DeadlineTask(description, dueInDays);
@@ -43,17 +43,12 @@ public class Task {
     return this.completed;
   }
 
-  public boolean hasDeadline() {
-    return false;
-  }
 
-  public int getPoints() {
-    return 0;
-  }
+  public abstract boolean hasDeadline();
 
-  public boolean dueToday() {
-    return false;
-  }
+  public abstract int getPoints();
+
+  public abstract boolean dueToday();
 
   public String printDetails() {
     return String.format("%s %s", this.checked(), this);

@@ -10,15 +10,17 @@ public class Bus {
   private int id;
   private int currentCapacity = 0;
 
-  @SuppressWarnings({"unchecked", "rawtypes"})  
+
   public Bus(int capacity, int numberOfStops) {
     this.capacity = capacity;
     this.numberOfStops = numberOfStops;
     this.id = Bus.counter++;
     this.currentStop = 0;
 
+    @SuppressWarnings("unchecked")
+    Queue<Passenger>[] temp  = (Queue<Passenger>[]) new Queue<?>[numberOfStops];
     
-    this.stops = new Queue[numberOfStops];
+    this.stops = temp;
     for (int i = 0; i < this.numberOfStops; i++) {
       this.stops[i] = new Queue<Passenger>(this.capacity);
     }
